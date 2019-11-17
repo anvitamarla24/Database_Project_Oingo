@@ -1,0 +1,123 @@
+<html>
+  <head>
+  <title>OINGO</title>
+  <style>
+  input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+
+  input[type=password], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  input[type=submit] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+      background-color: #45a049;
+  }
+
+  div.login{
+      width : 30%;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+  }
+  </style>
+  </head>
+<body>
+<!-- <body background="https://af-production.s3.amazonaws.com/photos/images/76458/original/books.jpg"> -->  <br>
+  <br>
+  <div align = "center">
+  <h2>Register</h2>
+  <br>
+  <br>
+  <div class = "login">
+    <form action="register.php" id = "form1" >
+      <label for="E-mail">E-mail</label>
+      <input type="text" id="email1" name="E-mail" pattern=".{1,32}" required title="1-32 characters" placeholder="Enter your E-mail">
+      <label for="FirstName">First Name</label>
+      <input type="text" id="first" name="FirstName" pattern=".{1,32}" required title="1-32 characters" placeholder="Enter your FirstName">
+      <label for="LastName">Last Name</label>
+      <input type="text" id="last" name="LastName" pattern=".{1,32}" required title="1-32 characters" placeholder="Enter your LastName">
+      <label for="password">Password</label>
+      <input type="password" id="password2" name="password" pattern=".{4,32}" required title="4-32 characters" placeholder="Enter your Password">
+      <label for="password">Re-Enter Password</label>
+      <input type="password" id="password1" name="password1" pattern=".{4,32}" required title="4-32 characters" placeholder="Re-Enter your Password">
+      <label for="State">Enter Default State</label>
+      <input type="text" id="state" name="state" pattern=".{1,32}" required title="1-32 characters" placeholder="Enter your State">
+      <label for="stime">Start Time</label>
+      <input type="time" id="stime" name="stime">
+      <label for="etime">End Time</label>
+      <input type="time" id="etime" name="etime">
+      <label for="radius">Radius (1 to 100 km)</label>
+      <input type="number" id="radius" name="radius" min="1" max="100">
+      <br>
+      <br>
+      <div id = "disp1"></div>
+      <br>
+      <input type="submit" id = "submit1" value="Register">
+    </form>
+  </div>
+  </div>
+  </body>
+  </html>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$("#form1").submit(function(event) {
+  event.preventDefault();
+  if ($("#email").val() != "" && $("#password").val() != "" && $("#first").val() != "" && $("#last").val() != "" && $("#password2").val() != "" && $("#password1").val() != "" && $("#state").val() != "" && $("#stime").val() != "" && $("#etime").val() != "" && $("#radius").val() != ""){
+    if($("#password2").val() == $("#password1").val()){
+      if($("#stime").val() <= $("#etime").val()){
+        if($("#email1").val().includes("@")){
+  var $form = $( this ), url = $form.attr( 'action' );
+  var posting = $.post(url, {email: $("#email1").val(),first : $("#first").val(), last : $("#last").val(),password: $("#password2").val(), state : $("#state").val(), stime : $("#stime").val(), etime : $("#etime").val(), radius : $("#radius").val()});
+  posting.done(function( data , status) {
+    var json = $.parseJSON(data);
+        if( json.success == '1'){
+          alert("User Registration Successful!")
+          window.open("login.html","_self");
+        }
+  });
+}
+else{
+  $( "#disp1" ).empty();
+  $( "#disp1" ).append("Enter Valid Email");
+}
+}
+else{
+  $( "#disp1" ).empty();
+  $( "#disp1" ).append("Starttime greater than Endtime");
+}
+}
+else{
+  $( "#disp1" ).empty();
+  $( "#disp1" ).append("Passwords dont match");
+}
+}
+else{
+  $( "#disp1" ).empty();
+  $( "#disp1" ).append("Please fill all fields");
+}
+});
+</script>

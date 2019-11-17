@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {margin:0;}
+input[type=text], select {
+      width: 40%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+
+input[type=text1], select {
+      width: 20%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+
+input[type=submit] {
+      width: 150px;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+div
+{
+    color: #000000;
+    font-size: 20px;
+}
+
+#map {
+        height: 200px;  /* The height is 400 pixels */
+        width: 50%;  /* The width is the width of the web page */
+       }
+#map1 {
+        height: 200px;  /* The height is 400 pixels */
+        width: 50%;  /* The width is the width of the web page */
+       }
+
+.grid-container {
+  display: grid;
+  grid-gap: 25px;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  color: #000000;
+  background-color: #dddddd;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 100px;
+  font-size: 25px;
+  text-align: center;
+}
+
+.grid-item:hover {
+    background-color: #000000;
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.button {
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.button3 {background-color: #f44336;}
+.button4 {background-color: #e7e7e7; color: black;}
+
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100vw;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 200px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  position: relative;
+  background-color: #fefefe;
+  margin: auto;
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.modal-header {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.modal-body {
+  max-height: calc(100vh - 250px);
+  overflow-y: auto;
+}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #5cb85c;
+  color: white;
+}
+
+.topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+.topnav a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.topnav .icon {
+  display: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 17px;    
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.topnav a:hover, .dropdown:hover .dropbtn {
+  background-color: #555;
+  color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.topnav-right {
+  float: right;
+}
+
+@media screen and (max-width: 600px) {
+  .topnav a:not(:first-child), .dropdown .dropbtn {
+    display: none;
+  }
+  .topnav a.icon {
+    float: right;
+    display: block;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topnav.responsive {position: relative;}
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+  .topnav.responsive .dropdown {float: none;}
+  .topnav.responsive .dropdown-content {position: relative;}
+  .topnav.responsive .dropdown .dropbtn {
+    display: block;
+    width: 100%;
+    text-align: left;
+  }
+}
+</style>
+<title>OINGO</title>
+</head> 
+<body>
+<!-- <body background="https://af-production.s3.amazonaws.com/photos/images/76458/original/books.jpg"> -->
+<div class="topnav">
+  <a href="Home.html">Notes for You</a>
+  <a class = "active" href="allnotes.html">All Notes</a>
+  <a href="mynotes.html">Your Notes</a>
+  <div class="topnav-right">
+  <div class="dropdown">
+  <button class="dropbtn">Settings</button>
+  <div class="dropdown-content">
+  <a href="Addnote.html">Add Note</a>
+  <a href="removenote.html">Remove Note</a>
+  <a href="changestate.html">Change State</a>
+  <a href="addstate.html">Add State</a>
+  <a href="removestate.html">Remove State</a>
+  <a href="addfriend.html">Add Friend</a>
+  <a href="removefriend.html">Remove Friend</a>
+   <a href="request.html">Friend Requests</a>
+  </div>
+</div>
+    <input type='submit' id = 'logout' value= 'Logout' >
+  </div>
+</div>
+<br>
+<div align = "center">
+<input type="text" id="search1" name="search" placeholder="Search for a note.."><input type='submit' id = 'noted' value= 'Search'><input type='submit' id = 'clear' value= 'Clear'>
+<br>
+<input type="radio" name="gender" value="tag" checked> Search by tag<br>
+<input type="radio" name="gender" value="name"> Search by description<br>
+<div id="map1"></div>
+</div>
+<br>
+<div id = "result" align = "center"><h2>Search above to see notes</h2></div>
+<br>
+<div id = "disp" class = "grid-container">
+</div>
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close">&times;</span>
+      <h2 id = "tala">Modal Header</h2>
+      <div id="map"></div>
+    </div>
+    <div class="modal-body">
+      <!-- <p id = "p1" ></p> -->
+      <p id = "p2" ></p>
+    </div>
+    <div class="modal-footer">
+      <h4 id = "foot" >Modal Footer</h4>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_5-WW4JG0dCU--0D60lkXIwnu0LEh_bw">
+    </script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC_5-WW4JG0dCU--0D60lkXIwnu0LEh_bw&callback=hi">
+    </script>
+<script>
+var latmap = 40.6942;
+var longmap = -73.9866;
+
+var slat = 40.6942;
+var slong = -73.9866;
+
+var slate = "";
+var slonge = "";
+
+$("#noted").click(function(){
+  $.post("allnotes.php", {on:$('input[name=gender]:checked').val(), word:$("#search1").val(), latitude : slate, longitude: slonge}, function(data, status){
+    var json = $.parseJSON(data);
+          if( json.success == '1'){
+              if(json.data.length != 0){
+                $( "#result" ).empty();
+                  $( "#disp" ).empty();
+                    var display= "";
+                    for( var i = 0 ; i < json.data.length ; i++){
+                      display = display + "<div id ='" + json.data[i].id + "' class='grid-item'>"+json.data[i].desc+"</div>";
+                    }
+                    $( "#disp" ).append(display);
+                  }
+                    else{
+                      $( "#result" ).empty();
+                      $( "#result" ).append("No Notes");
+                      $( "#disp" ).empty();
+                    }
+          }
+  });
+});
+
+$("#clear").click(function(){
+  location.reload();
+});
+
+$("#disp").on("click", ".grid-item", function() {
+        initMap();
+        var modal = document.getElementById('myModal');
+        var span = document.getElementsByClassName("close")[0];
+        span.onclick = function() {
+          modal.style.display = "none";
+        }
+        window.onclick = function(event) {
+          if (event.target == modal) {
+            modal.style.display = "none";
+          }
+        }
+        var value = $(this).attr('id');
+        var cont = $(this).text();
+        var tags = "Tags- ";
+        // $( "#p1" ).empty();
+        $( "#tala" ).empty();
+        $( "#foot" ).empty();
+        $( "#tala" ).append("Description : " + cont);
+        $.post("gettags.php", {id : value}, function(data,status){
+                    var json = $.parseJSON(data);
+                    if( json.success == '1'){
+                      if(json.data.length != 0){
+                        for( var i = 0 ; i < json.data.length ; i++){
+                         tags = tags + json.data[i].name;
+                        }       
+                      }     
+                    }   
+                $( "#foot" ).append(tags);
+        });
+        $.post("notedata.php", {id : value}, function(data, status){
+        var json = $.parseJSON(data);
+        latmap = parseFloat(json.lat);
+        longmap = parseFloat(json.long);
+        myLatLng = new google.maps.LatLng({lat: latmap, lng: longmap});
+        marker.setPosition(myLatLng);
+        map.setCenter(myLatLng);
+        $( "#foot" ).append(" <div>Posted By- " + json.uemail + " : " + json.first + " " + json.last+ "</div>");
+        if( json.success == '1'){
+          if ( json.allow == '1'){
+            if(json.data.length != 0){
+                  $( "#p2" ).empty();
+                  $( "#p2" ).append('Comments <br><div><form action = "comment.php" method="post"><input type="hidden" id="reqid" value = ' + value +' name="reqid"><input type="text1" id="comment"  name = "comment" maxlength="255" placeholder="Enter Comment."><button type = "button" onclick="goback()" class = "button">Submit</button></form></div><br>');
+                  var display= "";
+                    for( var i = 0 ; i < json.data.length ; i++){
+                      display = display + "<div>" + json.data[i].email + " : " +json.data[i].desc + "</div>";
+                    }                    
+                  modal.style.display = "block";
+                  $( "#p2" ).append(display);
+                }
+                else{
+            $( "#p2" ).empty();
+            $( "#p2" ).append('Comments <br><div><form action = "comment.php" method="post"><input type="hidden" id="reqid" value = ' + value +' name="reqid"><input type="text1" id="comment"  name = "comment" maxlength="255" placeholder="Enter Comment."><button type = "button" onclick="goback()" class = "button">Submit</button></form></div><br>');
+                  $( "#p2" ).append("No Comments");        
+                  modal.style.display = "block";
+          }  
+          }
+          else{
+            $( "#p2" ).empty();
+                  $( "#p2" ).append("Comments Disabled for this note.");        
+                  modal.style.display = "block";
+          }
+        }
+      });
+  });
+
+var marker;
+var marker1;
+var map;
+var map1;
+function initMap() {
+  // The location of Uluru
+  var uluru = {lat: latmap, lng: longmap};
+  // The map, centered at Uluru
+  map = new google.maps.Map(
+      document.getElementById('map'), {zoom: 4, center: uluru});
+  // The marker, positioned at Uluru
+  marker = new google.maps.Marker({position: uluru, map: map});
+}
+
+function hi() {
+         var myLatlng = {lat: slat, lng: slong};
+        map1 = new google.maps.Map(document.getElementById('map1'), {
+          zoom: 7,
+          center: myLatlng
+        });
+
+        marker1 = new google.maps.Marker({
+          map: map1,
+          title: 'Click to zoom'
+        });
+
+        map1.addListener('center_changed', function() {
+          // 3 seconds after the center of the map has changed, pan back to the
+          // marker.
+          window.setTimeout(function() {
+            map1.panTo(marker1.getPosition());
+          }, 3000);
+        });
+
+         map1.addListener('click', function(e) {
+          console.log(e);
+          marker1.setPosition(e.latLng);
+          slate = e.latLng.lat();
+          slonge = e.latLng.lng();
+  });
+}
+
+function goback() {
+  $.post("comment.php", {reqid: $("#reqid").val(), comment: $("#comment").val()}, function(data, status){
+    var json = $.parseJSON(data);
+    if(json.success = '1'){
+      window.open("allnotes.html","_self");
+    }
+  });
+}
+
+$("#logout").click(function(){
+  $.post("logout.php", function(data, status){
+    var json = $.parseJSON(data);
+    if(json.success = '1'){
+      window.open("thankyou.html","_self");
+    }
+  });
+});
+</script>

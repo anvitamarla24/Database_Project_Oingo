@@ -1,0 +1,103 @@
+<html>
+  <head>
+  <title>OINGO</title>
+  <style>
+  input[type=text], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  input[type=password], select {
+      width: 100%;
+      padding: 12px 20px;
+      margin: 8px 0;
+      display: inline-block;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      box-sizing: border-box;
+  }
+  input[type=submit] {
+      width: 100%;
+      background-color: #4CAF50;
+      color: white;
+      padding: 14px 20px;
+      margin: 8px 0;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+  }
+
+  input[type=submit]:hover {
+      background-color: #45a049;
+  }
+
+  div.login{
+      width : 30%;
+      border-radius: 5px;
+      background-color: #f2f2f2;
+      padding: 20px;
+  }
+  </style>
+  </head>
+<body>
+<!-- <body background="https://af-production.s3.amazonaws.com/photos/images/76458/original/books.jpg"> --> <br>
+<div align = "center">
+<h2>LOGIN</h2>
+<br>
+<br>
+  <div class = "login">
+    <form action="login.php" id = "form1">
+      <label for="E-mail">E-mail</label>
+      <input type="text" id="email" name="E-mail" pattern=".{1,32}" required title="1-32 characters" placeholder="Enter your E-mail">
+      <label for="password">Password</label>
+      <input type="password" id="password" name="password" pattern=".{4,32}" required title="4-32 characters" placeholder="Enter your Password">
+      <br>
+      <br>
+      <div id = "disp"></div>
+      <br>
+      <input type="submit" id = "submit" value="Login">
+      Dont have an account? <a href="register.html">Register</a>
+    </form>
+  </div>
+  </div>
+  </body>
+  </html>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script>
+$( document ).ready(function() {
+    $.post("sessioncheck.php", function(data, status){
+        var json = $.parseJSON(data);
+        if( json.success == '1'){
+            window.open("Home.html","_self");
+        }
+    });
+});
+
+
+$("#form1").submit(function(event) {
+  event.preventDefault();
+  if ($("#email").val().includes("@")){
+  var $form = $( this ), url = $form.attr( 'action' );
+  var posting = $.post(url, {email: $("#email").val(),password: $("#password").val()});
+  posting.done(function( data , status) {
+    var json = $.parseJSON(data);
+        if( json.success == '1'){
+            window.open("Home.html","_self");
+        }
+        else{
+            $( "#disp" ).empty();
+            $( "#disp" ).append(json.error);
+        }
+  });
+}
+else{
+  $( "#disp" ).empty();
+  $( "#disp" ).append("Enter Valid Email");
+}
+});
+</script>
