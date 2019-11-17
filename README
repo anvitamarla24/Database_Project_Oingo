@@ -1,0 +1,5 @@
+This is a Database Project that was done to implement/do the following:
+
+- Database design and web development application that notifies any user of the surrounding events based on his specified filters like the location.
+- Used geolocation and maps API, to pin the location and find ongoing or upcoming events with respect to the constraints of the user.
+- Designing the database and the application was done using Relational Database, JavaScript and PHP.
